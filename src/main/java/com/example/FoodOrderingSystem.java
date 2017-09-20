@@ -157,7 +157,7 @@ class FoodOrderingSystem {
     /**
      * desertChooser() is responsible for getting list of Desserts which belong to given cuisine
      *
-     * @param cuisine
+     * @param cuisine chosen by user cuisine
      * @return Dessert chosen by user in elementChooser() method
      */
     private Dessert dessertChooser(Cuisine cuisine) {
@@ -200,7 +200,7 @@ class FoodOrderingSystem {
     /**
      * mainCourseChooser() is responsible for getting list of MainCourses which belong to given cuisine
      *
-     * @param cuisine
+     * @param cuisine chosen by user cuisine
      * @return MainCourse choosen by user in elementChooser
      */
     private MainCourse mainCourseChooser(Cuisine cuisine) {
@@ -216,7 +216,7 @@ class FoodOrderingSystem {
     /**
      * elementChooser() firstly present list of elements available to order and then get user input and return chosen object
      *
-     * @param meals
+     * @param meals list of filtered by cuisine Orderables
      * @return Dessert, MainCourse or Drink choosen by user
      */
     private Orderable elementChooser(List<? extends Orderable> meals) {

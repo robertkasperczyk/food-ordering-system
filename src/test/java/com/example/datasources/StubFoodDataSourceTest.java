@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -52,7 +53,7 @@ public class StubFoodDataSourceTest {
         List<MainCourse> mainCourses = stubFoodDataSource.getListOfMainCourses(Cuisine.POLISH);
 
         //then
-        assertThat(mainCourses).isEqualTo(Arrays.asList(mainCourse3));
+        assertThat(mainCourses).isEqualTo(Collections.singletonList(mainCourse3));
     }
 
     @Test
@@ -67,7 +68,7 @@ public class StubFoodDataSourceTest {
         List<MainCourse> mainCourses = stubFoodDataSource.getListOfMainCourses(Cuisine.ITALIAN);
 
         //then
-        assertThat(mainCourses).isEqualTo(Arrays.asList());
+        assertThat(mainCourses).isEqualTo(Collections.emptyList());
     }
 
     @Test
@@ -82,7 +83,7 @@ public class StubFoodDataSourceTest {
         List<Dessert> mainCourses = stubFoodDataSource.getListOfDesserts(Cuisine.POLISH);
 
         //then
-        assertThat(mainCourses).isEqualTo(Arrays.asList(dessert2));
+        assertThat(mainCourses).isEqualTo(Collections.singletonList(dessert2));
     }
 
     @Test
@@ -97,7 +98,7 @@ public class StubFoodDataSourceTest {
         List<Dessert> mainCourses = stubFoodDataSource.getListOfDesserts(Cuisine.ITALIAN);
 
         //then
-        assertThat(mainCourses).isEqualTo(Arrays.asList());
+        assertThat(mainCourses).isEqualTo(Collections.emptyList());
     }
 
 }
