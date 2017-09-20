@@ -7,11 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class FoodOrderingSystemTest {
@@ -32,10 +36,15 @@ public class FoodOrderingSystemTest {
         iceCream = new Dessert("Pistacio ice cream", 6, Cuisine.ITALIAN);
         Dessert cheeseCake = new Dessert("Cheese cake", 5, Cuisine.POLISH);
 
-        foodDataSource = new StubFoodDataSource(
-                new ArrayList<>(Arrays.asList(cola, water)),
-                new ArrayList<>(Arrays.asList(tacos, quesadilla, burrito)),
-                new ArrayList<>(Arrays.asList(iceCream, cheeseCake)));
+        foodDataSource = mock(FoodDataSource.class);
+        when(foodDataSource.getListOfDesserts(Cuisine.POLISH)).thenReturn(Collections.singletonList(cheeseCake));
+        when(foodDataSource.getListOfDesserts(Cuisine.ITALIAN)).thenReturn(Collections.singletonList(iceCream));
+        when(foodDataSource.getListOfDrinks()).thenReturn(Arrays.asList(cola, water));
+        when(foodDataSource.getListOfMainCourses(Cuisine.MEXICAN)).thenReturn(Arrays.asList(tacos,quesadilla,burrito));
+//        foodDataSource = new StubFoodDataSource(new ArrayList<>(Arrays.asList(cola, water)),
+//                new ArrayList<>(Arrays.asList(tacos, quesadilla, burrito)),
+//                new ArrayList<>(Arrays.asList(iceCream, cheeseCake)));
+
     }
 
     @Test

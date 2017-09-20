@@ -65,8 +65,8 @@ class FoodOrderingSystem {
                     break;
                 case 2:
                     Lunch lunch = lunchChooser();
-                    order.add(lunch.getDessert());
                     order.add(lunch.getMainCourse());
+                    order.add(lunch.getDessert());
                     break;
                 case 3:
                     if (!order.isEmpty()) {
@@ -144,7 +144,6 @@ class FoodOrderingSystem {
             cuisine = cuisineChooser();
             mainCourse = mainCourseChooser(cuisine);
         }
-        this.order.add(mainCourse);
         Dessert dessert = null;
         while (dessert == null) {
             System.out.print("Dessert - ");
