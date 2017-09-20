@@ -214,7 +214,7 @@ class FoodOrderingSystem {
     }
 
     /**
-     * elementChooser() firstly present list of elements available to order and then get user input and return chosen object
+     * elementChooser() firstly presents list of elements available to order and then get user input and return chosen object
      *
      * @param meals list of filtered by cuisine Orderables
      * @return Dessert, MainCourse or Drink choosen by user
