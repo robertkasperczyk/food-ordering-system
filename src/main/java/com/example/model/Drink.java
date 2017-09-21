@@ -62,4 +62,25 @@ public class Drink implements Orderable {
         stringBuilder.append("$\n");
         return stringBuilder.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Drink drink = (Drink) o;
+
+        if (Double.compare(drink.price, price) != 0) return false;
+        return name.equals(drink.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name.hashCode();
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

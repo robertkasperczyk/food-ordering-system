@@ -6,4 +6,8 @@ public class MainCourse extends Meal {
     public MainCourse(String name, double price, Cuisine cuisine) {
         super(name, price, cuisine);
     }
+
+    public MainCourse(Meal meal) {
+        super(meal);
+    }
 }

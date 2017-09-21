@@ -6,7 +6,7 @@ public interface Orderable {
 
     String getName();
 
-    default String getMenuEntry(){
+    default String getMenuEntry() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getName());
         for (int i = 0; i < 50 - getName().length(); i++) {
@@ -16,5 +16,6 @@ public interface Orderable {
         stringBuilder.append("$\n");
         return stringBuilder.toString();
     }
+
 
 }

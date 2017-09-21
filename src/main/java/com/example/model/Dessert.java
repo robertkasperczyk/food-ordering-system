@@ -6,4 +6,8 @@ public class Dessert extends Meal {
         super(name, price, cuisine);
     }
 
+    public Dessert(Meal meal) {
+        super(meal);
+    }
+
 }
