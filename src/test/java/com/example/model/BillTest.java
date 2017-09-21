@@ -3,8 +3,7 @@ package com.example.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
@@ -15,12 +14,24 @@ public class BillTest {
     private Orderable order3;
     private Orderable order2;
     private Orderable order1;
+    private ResourceBundle bundle;
 
     @Before
     public void setUp() throws Exception {
         order1 = mock(Orderable.class);
         order2 = mock(Orderable.class);
         order3 = mock(Orderable.class);
+        bundle = new ResourceBundle() {
+            @Override
+            protected Object handleGetObject(String key) {
+                return "test";
+            }
+
+            @Override
+            public Enumeration<String> getKeys() {
+                return Collections.emptyEnumeration();
+            }
+        };
     }
 
     @Test
