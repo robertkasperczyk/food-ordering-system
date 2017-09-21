@@ -11,6 +11,13 @@ public class Drink implements Orderable {
         this.price = price;
     }
 
+    public Drink(Drink drink) {
+        this.name = drink.name;
+        this.price = drink.price;
+        this.iceCubes = drink.iceCubes;
+        this.lemon = drink.lemon;
+    }
+
     public boolean isIceCubes() {
         return iceCubes;
     }

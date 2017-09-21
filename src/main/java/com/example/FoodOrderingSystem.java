@@ -92,7 +92,7 @@ class FoodOrderingSystem {
     private Drink drinkChooser() {
         System.out.println(bundle.getString("chooseDrink"));
         List<Drink> drinks = new ArrayList<>(dataSource.getListOfDrinks());
-        Drink drink = (Drink) elementChooser(drinks);
+        Drink drink = new Drink((Drink) elementChooser(drinks));
         boolean correctChoiceProvided = false;
         int choice;
         System.out.println(bundle.getString("lemonOrIce"));
