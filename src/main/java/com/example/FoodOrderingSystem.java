@@ -11,9 +11,12 @@ class FoodOrderingSystem {
     private final FoodDataSource dataSource;
     private final List<Orderable> order;
     private final Scanner scanner;
+    private final ResourceBundle bundle;
 
 
     public FoodOrderingSystem(FoodDataSource dataSource, InputStream in) {
+
+        bundle = ResourceBundle.getBundle("strings/strings");
         this.dataSource = dataSource;
         this.order = new ArrayList<>();
         scanner = new Scanner(in);
@@ -25,13 +28,13 @@ class FoodOrderingSystem {
      * @return Bill object containing list of orders.
      */
     public Bill startSystem() {
-        System.out.println("Welcome in our restaurant!");
+        System.out.println(bundle.getString("welcome"));
         boolean orderReady = false;
 
         while (!orderReady) {
             orderReady = actionChooser();
         }
-        return new Bill(this.order);
+        return new Bill(this.order, bundle);
     }
 
     /**
@@ -45,16 +48,14 @@ class FoodOrderingSystem {
         int choice;
         boolean correctChoiceProvided = false;
         while (!correctChoiceProvided) {
-            System.out.println("Would you like to order:");
-            System.out.println("(1) Drink");
-            System.out.println("(2) Lunch");
+            System.out.println(bundle.getString("orderBaseChoice"));
             if (!order.isEmpty()) {
-                System.out.println("(3) I want to place my order.");
+                System.out.println(bundle.getString("placeOrder"));
             }
             try {
                 choice = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("You must have provided wrong input, please try again!");
+                System.out.println(bundle.getString("wrongInput"));
                 scanner.next();
                 continue;
             }
@@ -74,7 +75,7 @@ class FoodOrderingSystem {
                         break;
                     }
                 default:
-                    System.out.println("You must have provided wrong number, please try again!");
+                    System.out.println(bundle.getString("wrongNumber"));
                     correctChoiceProvided = false;
             }
         }
@@ -89,21 +90,18 @@ class FoodOrderingSystem {
      * @return Drink object chosen by user.
      */
     private Drink drinkChooser() {
-        System.out.println("Please choose a drink:");
+        System.out.println(bundle.getString("chooseDrink"));
         List<Drink> drinks = new ArrayList<>(dataSource.getListOfDrinks());
         Drink drink = (Drink) elementChooser(drinks);
         boolean correctChoiceProvided = false;
         int choice;
-        System.out.println("Would you like to add an ice or lemon to your drink?");
-        System.out.println("(1) Ice");
-        System.out.println("(2) Lemon");
-        System.out.println("(3) Both");
-        System.out.println("(4) None");
+        System.out.println(bundle.getString("lemonOrIce"));
+        System.out.println(bundle.getString("lemonIceOptions"));
         while (!correctChoiceProvided) {
             try {
                 choice = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("You must have provided wrong input, please try again!");
+                System.out.println(bundle.getString("wrongInput"));
                 scanner.next();
                 continue;
 
@@ -123,7 +121,7 @@ class FoodOrderingSystem {
                 case 4:
                     break;
                 default:
-                    System.out.println("You must have provided wrong number, please try again!");
+                    System.out.println(bundle.getString("wrongNumber"));
                     correctChoiceProvided = false;
             }
         }
@@ -162,10 +160,10 @@ class FoodOrderingSystem {
     private Dessert dessertChooser(Cuisine cuisine) {
         List<Dessert> desserts = new ArrayList<>(dataSource.getListOfDesserts(cuisine));
         if (desserts == null || desserts.isEmpty()) {
-            System.out.println("Unfortunately, we have no products from chosen cuisine, please choose other one.\n");
+            System.out.println(bundle.getString("noProductsFromCuisine"));
             return null;
         }
-        System.out.println("Please, choose a dessert:");
+        System.out.println(bundle.getString("chooseDessert"));
         return (Dessert) elementChooser(desserts);
 
     }
@@ -176,7 +174,7 @@ class FoodOrderingSystem {
      * @return Cuisine chosen by user
      */
     private Cuisine cuisineChooser() {
-        System.out.println("Please choose a cuisine:");
+        System.out.println(bundle.getString("chooseCuisine"));
         Cuisine[] cuisines = Cuisine.values();
         IntStream.range(1, cuisines.length + 1).forEach(i ->
                 System.out.println("(" + i + ") " + cuisines[i - 1])
@@ -187,10 +185,10 @@ class FoodOrderingSystem {
                 int choice = scanner.nextInt();
                 cuisine = cuisines[choice - 1];
             } catch (InputMismatchException e) {
-                System.out.println("You must have provided wrong input, please try again!");
+                System.out.println(bundle.getString("wrongInput"));
                 scanner.next();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("You must have provided wrong number, please try again!");
+                System.out.println(bundle.getString("wrongNumber"));
             }
         }
         return cuisine;
@@ -205,10 +203,10 @@ class FoodOrderingSystem {
     private MainCourse mainCourseChooser(Cuisine cuisine) {
         List<MainCourse> mainCourses = new ArrayList<>(dataSource.getListOfMainCourses(cuisine));
         if (mainCourses == null || mainCourses.isEmpty()) {
-            System.out.println("Unfortunately, we have no products from chosen cuisine, please choose other one.\n");
+            System.out.println(bundle.getString("noProductsFromCuisine"));
             return null;
         }
-        System.out.println("Please, choose a main course:");
+        System.out.println(bundle.getString("chooseMainCourse"));
         return (MainCourse) elementChooser(mainCourses);
     }
 
@@ -228,10 +226,10 @@ class FoodOrderingSystem {
                 int choice = scanner.nextInt();
                 meal = meals.get(choice - 1);
             } catch (InputMismatchException e) {
-                System.out.println("You must have provided a wrong input, please try again!");
+                System.out.println(bundle.getString("wrongInput"));
                 scanner.next();
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("You must have provided a wrong number, please try again!");
+                System.out.println(bundle.getString("wrongNumber"));
             }
         }
         return meal;

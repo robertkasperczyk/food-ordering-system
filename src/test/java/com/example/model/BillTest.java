@@ -31,7 +31,7 @@ public class BillTest {
         when(order3.getPrice()).thenReturn(10d);
 
         //when
-        bill = new Bill(Arrays.asList(order1, order2, order3));
+        bill = new Bill(Arrays.asList(order1, order2, order3), bundle);
 
         //then
         assertThat(16d).isEqualTo(bill.getSum());
@@ -40,13 +40,13 @@ public class BillTest {
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenNull() {
         //when
-        bill = new Bill(null);
+        bill = new Bill(null, bundle);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenEmptyList() {
         //when
-        bill = new Bill(new ArrayList<>());
+        bill = new Bill(new ArrayList<>(), bundle);
     }
 
 }
